@@ -14,18 +14,18 @@ c ; v: Escala
 f ; g: Rotação
 ## Compilação
 Para compilar o código pode ser utilizar o comando ‘make’ do Makefile
-´´´
+```
 $ make
-´´´
+```
 Também pode ser feito através de linha de comando
-´´´
+```
 $ gcc base.c tree.c boneco_neve.c cenario.c iglu.c pingu.c sol.c trab.c -lglfw -lGL -lGLEW -lm
-´´´
+```
 ### Executando o programa
 Para executar o programa pode ser utilizar o comando ‘make run’ do Makefile
-´´´
+```
 $ make run
-´´´
+```
 Também pode ser executado diretamente o arquivo compilado
 ## Membros
 Luan Ícaro Pinto Arcanjo 10799230  
