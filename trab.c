@@ -14,6 +14,12 @@
 #include "iglu.h"
 #include "tree.h"
 
+
+/*
+declaracao dos nossos objetos em cena,
+sao declarados globalmente para poder mudar seus parametros
+da matriz de tranformacao na funcao do teclado.
+*/
 OBJ cenario;
 OBJ boneco_neve;
 OBJ boneco_neve_cinza;
@@ -26,59 +32,91 @@ OBJ tree_cinza;
 OBJ iglu;
 OBJ iglu_cinza;
 
+/*
+funcao de captacao da entrada do teclado
+*/
 static void keyboard_event(GLFWwindow* window, int button, int scancode, int action, int mods){
-    
-    //botoes de escala do sol
-
+    /*
+    vendo se o sol ja esta no mesmo lugar que o sol_cinza, eh proibido mexer os objetos
+    depois de estarem em suas respectivas posicoes
+    */
     if( compara_objetos(sol, sol_cinza) == 0 ){
         if(button == 67 && action == GLFW_PRESS){
+            /*botao c - abaixa a escala do sol*/
             sol.s -= 0.05;
         }else if( button == 86 && action == GLFW_PRESS ){
+            /*botao v - aumenta a escala do iglu*/
             sol.s += 0.05;
         }
-    }
+    }   
 
+    /*
+    vendo se o iglu ja esta no mesmo lugar que o iglu_cinza, eh proibido mexer os objetos
+    depois de estarem em suas respectivas posicoes
+    */
     if( compara_objetos(iglu, iglu_cinza) == 0){
         if(button == 90 && action == GLFW_PRESS){
+            /*botao z - abaixa a escala do iglu*/
             iglu.s -= 0.05;
         }else if( button == 88 && action == GLFW_PRESS ){
+            /*botao x - aumenta a escala do iglu*/
             iglu.s += 0.05;
         }
     }
 
+    /*
+    vendo se o boneco_neve ja esta no mesmo lugar que o boneco_neve_cinza, eh proibido mexer os objetos
+    depois de estarem em suas respectivas posicoes
+    */
     if( compara_objetos(boneco_neve, boneco_neve_cinza) == 0){
         if(button == 71 && action == GLFW_PRESS){
+            /*botao f - rotaciona o boneco em sentido horario*/
             boneco_neve.theta += 0.05;
             if(boneco_neve.theta >= 2*M_PI){
                 boneco_neve.theta = 0;
             }
         }else if( button == 70 && action == GLFW_PRESS ){
+            /*botao f - rotaciona o boneco em sentido ant-horario*/
             boneco_neve.theta -= 0.05;
         }
     }
 
+    /*
+    vendo se o pingu ja esta no mesmo lugar que o pingu_cinza, eh proibido mexer os objetos
+    depois de estarem em suas respectivas posicoes
+    */
     if( compara_objetos(pingu, pingu_cinza) == 0){
         if(button == 262 && action == GLFW_PRESS){
+            /*botao seta direcional direita → - translada o pingu para direta*/
             pingu.tx += 0.05;
         }else if( button == 263 && action == GLFW_PRESS ){
+            /*botao seta direcional esquerda ← - translada o pingu para esquerda*/
             pingu.tx -= 0.05;
         }else if(button == 264 && action == GLFW_PRESS){
+            /*botao seta direcional baixo ↓ - abaixa a escala do pingu*/
             pingu.s -= 0.05;
         }else if(button == 265 && action == GLFW_PRESS){
+            /*botao seta direcional cima ↑ - aumenta a escala do pingu*/
             pingu.s += 0.05;
         }
     }
-
     
-
+    /*
+    vendo se o tree ja esta no mesmo lugar que o tree_cinza, eh proibido mexer os objetos
+    depois de estarem em suas respectivas posicoes
+    */
     if( compara_objetos(tree, tree_cinza) == 0){
         if(button == 65 && action == GLFW_PRESS){
+            /*botao a - translada a arvore para esquerda*/
             tree.tx -= 0.05;
         }else if( button == 68 && action == GLFW_PRESS ){
+            /*botao d - translada a arvore para direita*/
             tree.tx += 0.05;
         }else if(button == 83 && action == GLFW_PRESS){
+            /*botao s - translada a arvore para baixo*/
             tree.ty -= 0.05;
         }else if(button == 87 && action == GLFW_PRESS){
+            /*botao w - translada a arvore para cima*/
             tree.ty += 0.05;
         }
     }
@@ -190,7 +228,10 @@ int main(void){
     glGenBuffers(1, &buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
 
+    //variavel que guarda a primeira posicao livre do nosso vetor de coordenadas
     int atual = 0;
+
+    /*chamando as funcoes de criar os objetos e atualizando atual*/
 
     cenario = cria_cenario(vertices, 0);
     atual = cenario.num_vertices;
@@ -266,8 +307,10 @@ int main(void){
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(1.0, 1.0, 1.0, 1.0);
 
+        //cenario eh inicialmente apagado
         int COR_CENARIO = PRETO;
 
+        //verificando se todos os objetos estao em suas respectivas posicoes
         int pinta_cenario = 1;
         pinta_cenario &= compara_objetos(iglu, iglu_cinza);
         pinta_cenario &= compara_objetos(sol, sol_cinza);
@@ -275,8 +318,10 @@ int main(void){
         pinta_cenario &= compara_objetos(pingu, pingu_cinza);
         pinta_cenario &= compara_objetos(tree, tree_cinza);
 
+        //se todos os objetos estao em suas respectivas posicoes, pinta o cenario
         if(pinta_cenario) COR_CENARIO = COLORIDO;
 
+        /*desenhando o cenario*/
         desenha_cenario(cenario, loc_color, loc_matriz, COR_CENARIO);
 
         //deseshando objetos cinza
