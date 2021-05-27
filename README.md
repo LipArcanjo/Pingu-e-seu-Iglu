@@ -27,6 +27,9 @@ Para executar o programa pode ser utilizar o comando ‘make run’ do Makefile
 $ make run
 ```
 Também pode ser executado diretamente o arquivo compilado
+## Vídeo
+Um vídeo de apresentação rápida do projeto pode ser encontrado no seguinte link:
+[Vídeo](https://youtu.be/nZ0lWT8bt7M)
 ## Membros
 Luan Ícaro Pinto Arcanjo 10799230  
 Rodrigo Cesar Arboleda 10416722  
