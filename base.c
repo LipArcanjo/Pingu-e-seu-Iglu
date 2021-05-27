@@ -153,7 +153,8 @@ int compara_objetos(OBJ obj1, OBJ obj2){
     //eh maior que um epsilon ( para evitar impressicao de ponto flutuante)
     if( fabs(obj1.tx - obj2.tx)  > eps) return 0;
     if( fabs(obj1.ty - obj2.ty) > eps) return 0;
-    if( fabs(obj1.theta - obj2.theta) > eps) return 0;
+    //compara o cosenos dos angulos, por questaso de perido a cada 2*PI
+    if( fabs(cos(obj1.theta) - cos(obj2.theta)) > eps) return 0;
     if( fabs(obj1.s - obj2.s) > eps) return 0;
 
     return 1;
