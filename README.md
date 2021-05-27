@@ -2,7 +2,7 @@
 Este projeto consiste no projeto prático da disciplina de computação gráfica. Para este projeto foi desenvolvido um cenário que se inicia sem cor, mas ao colocar os objetos na posição correta através de comando no teclado, o cenário se acende.
 ## Comandos
 ### Pingu
-↑ ; ↑: Escala  
+↑ ; ↓: Escala  
 → ; ← : Translação
 ### Árvore
 w ; a ; s ; d: Translação
